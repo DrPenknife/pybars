@@ -5,6 +5,8 @@ Apache ECharts + python magic
 # install
 !git clone https://github.com/DrPenknife/pybars.git
 
+
+<html>
  <iframe
             width="600"
             height="480"
@@ -13,3 +15,4 @@ Apache ECharts + python magic
             allowfullscreen
             
         ></iframe>
+ </html>
