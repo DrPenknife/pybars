@@ -43,9 +43,10 @@ def get_html(data):
     <script type="text/javascript">
     var dom = document.getElementById('container');
     var myChart = echarts.init(dom, null, {
-        renderer: 'canvas',
+        renderer: 'svg',
         useDirtyRect: false
-    });
+    }); 
+
 
     var dataframe = {{dataframe}};
     var app = {};
@@ -66,6 +67,16 @@ def get_html(data):
             text: myoptions.title || '',
             subtext: myoptions.subtitle || ''
         },
+        toolbox: {
+            feature: {
+              dataZoom: {
+                yAxisIndex: false
+              },
+              saveAsImage: {
+                pixelRatio: 2
+              }
+            }
+          },
         legend: {
             top: 5,
         }, 
@@ -178,6 +189,7 @@ import sqlite3
 
 def bindSql(c):
     global con
+    print("binding sql",con)
     con = c
     
 import re
