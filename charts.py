@@ -209,8 +209,12 @@ def sql(line, cell):
     for cmd in cell.split(";"):
         __curs = con.execute(cmd)
         __ans = (__curs.fetchall())
-        names = list(map(lambda x: x[0], __curs.description)) if __curs.description else []
-        __df = pd.DataFrame(data= __ans, columns = names)
+        if __curs.description:
+            names = list(map(lambda x: x[0], __curs.description))
+            __df = pd.DataFrame(data= __ans, columns = names)
+        else:
+            names
+            __df = pd.DataFrame(data= __ans)
     if len(__ans) > 0:
         if magic_args["show"] == "raw":
             return __ans
