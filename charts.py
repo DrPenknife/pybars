@@ -207,7 +207,13 @@ def sql(line, cell):
     global __ans, __curs, __df
     names = []
     for cmd in cell.split(";"):
-        __curs = con.execute(cmd)
+        if magic_args["db"]:
+            print(f"using {magic_args['db']}")
+            _dbcon=sqlite3.connect(magic_args["db"])
+        else:
+            _dbcon=con
+        
+        __curs = _dbcon.execute(cmd)
         __ans = (__curs.fetchall())
         if __curs.description:
             names = list(map(lambda x: x[0], __curs.description))
@@ -215,6 +221,10 @@ def sql(line, cell):
         else:
             names
             __df = pd.DataFrame(data= __ans)
+            
+        if magic_args["db"]:
+            _dbcon.close()
+            
     if len(__ans) > 0:
         if magic_args["show"] == "raw":
             return __ans
