@@ -207,7 +207,7 @@ def sql(line, cell):
     global __ans, __curs, __df
     names = []
     for cmd in cell.split(";"):
-        if magic_args["db"]:
+        if "db" in magic_args:
             print(f"using {magic_args['db']}")
             _dbcon=sqlite3.connect(magic_args["db"])
         else:
@@ -222,7 +222,7 @@ def sql(line, cell):
             names
             __df = pd.DataFrame(data= __ans)
             
-        if magic_args["db"]:
+        if "db" in magic_args:
             _dbcon.close()
             
     if len(__ans) > 0:
